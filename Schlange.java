@@ -1,79 +1,81 @@
 package game.togheter.de;
 
-import java.util.Random;
+/**
+ * Um das hier nun angenehmer zu machen, wird die klasse abstrakter gestaltet.
+ * Wir beschränken uns auf die Dinge, die jede Schlange hat.
+ *
+ * Eine Position und eine Methode, die diese manipuliert.
+ *
+ * Und wenn wir sogar einen weiteren Schrit zurückgehen, sehen wir, das die
+ * Schlange genaugenommen ein Spielobjekt ist. Und da wir bereits in Spielobjekt
+ * die Position des Spielobjektes definiert haben, k�nnen wir dies bei der
+ * Schlange weglassen und müssen nurnoch die Bewegung implementieren.
+ *
+ * Zusaetzlich geben wir der Schlange einen 'Flag' der angibt ob sie sich
+ * bewegen kann, oder nicht. Dieser wird veraendert, wenn die Schlange betäubt
+ * wird.
+ */
+public class Schlange extends SpielObjekt {
+	private boolean bewegen = true;
 
-public class Schlange {
+	public Schlange() {
+		/**
+		 * Hier r�ber rufen wir den Konstruktor von SpielObjekt auf. Wenn eine
+		 * Klasse von einer anderen erbt, so hat man Zugriff auf den
+		 * Konstruktor.
+		 */
+		super(40, 10);
+	}
 
-	Random r = new Random();
+	/**
+	 * In diesem Fall ben�tigen wir nicht den Gesamten Spieler, sondern nur
+	 * seine Positionen. Diese werden dann beim Aufruf der Methode �bergeben.
+	 * Aktuell haben wir also nichts mit dem Spieler zu tun, sondern
+	 * implementieren nur das Verhalten anhand der uebergebenen Position. Dazu
+	 * erwarten wir, das alle Schlangen in Form eines Arrays von Schlange[] hier
+	 * angeben werden.
+	 */
+	public void geheZumSpieler(int spielerXPosition, int spielerYPosition, Schlange[] schlangen) {
+		// Schlange bewegt sich nur, wenn sie mit keinem Stun in Kontakt
+		// gekommen ist
+		if (bewegen) {
+			for (byte i = 0; i < schlangen.length; i++) {
+				if (spielerXPosition < schlangen[i].erhaltePosition().x) {
+					/*
+					 * Hier setzen wir die neue Position anhand der alten
+					 * Position der Schlange
+					 */
+					schlangen[i].veraendereXPositionUm(-1);
+					System.out.println("bin ich hier reingekommen-x?");
+				} else if (spielerXPosition > schlangen[i].erhaltePosition().x) {
+					schlangen[i].veraendereXPositionUm(1);
+					System.out.println("bin ich hier reingekommen+x?");
+				}
 
-	java.awt.Point snakePosition = new java.awt.Point(r.nextInt(40), r.nextInt(10));
-	java.awt.Point snakePosition2 = new java.awt.Point(r.nextInt(40), r.nextInt(10));
-	java.awt.Point snakePosition3 = new java.awt.Point(r.nextInt(40), r.nextInt(10));
-	java.awt.Point snakePosition4 = new java.awt.Point(r.nextInt(40), r.nextInt(10));
-
-	boolean schlangenBewegung = true;
-
-	public void kannSchlangeZumSpieler(boolean gehen) {
-		if (gehen == true) {
-			schlange1GehtZumSpieler();
-			schlange2GehtZumSpieler();
-			schlange3GehtZumSpieler();
-			schlange4GehtZumSpieler();
-		} else {
-			System.out.println("Sie haben nun eine Runde mehr Zeit!");
+				if (spielerYPosition < schlangen[i].erhaltePosition().y) {
+					schlangen[i].veraendereYPositionUm(-1);
+					System.out.println("bin ich hier reingekommen-y?");
+				} else if (spielerYPosition > schlangen[i].erhaltePosition().y) {
+					schlangen[i].veraendereYPositionUm(1);
+					System.out.println("bin ich hier reingekommen+y?");
+				}
+			}
 		}
 	}
 
-	private void schlange1GehtZumSpieler() {
-		Spieler player = new Spieler();
-
-		if (player.playerPosition.x < snakePosition.x)
-			snakePosition.x--;
-		else if (player.playerPosition.x > snakePosition.x)
-			snakePosition.x++;
-		if (player.playerPosition.y < snakePosition.y)
-			snakePosition.y--;
-		else if (player.playerPosition.y > snakePosition.y)
-			snakePosition.y++;
+	/**
+	 * Wenn die Schlange mit dem Stun betäubt ist, muss diese Methode aufgerufen
+	 * werden.
+	 */
+	public void mitStunBetaeubt() {
+		bewegen = false;
 	}
 
-	private void schlange2GehtZumSpieler() {
-		Spieler player = new Spieler();
-
-		if (player.playerPosition.x < snakePosition2.x)
-			snakePosition2.x--;
-		else if (player.playerPosition.x > snakePosition2.x)
-			snakePosition2.x++;
-		if (player.playerPosition.y < snakePosition2.y)
-			snakePosition2.y--;
-		else if (player.playerPosition.y > snakePosition2.y)
-			snakePosition2.y++;
+	/**
+	 * Je nachdem wie das umgsetzt wird, kann sich die Schlange eventuell wieder
+	 * nach einer Zeit bewegen. Dann solltest du diese Methode aufrufen
+	 */
+	public void stunVorbei() {
+		bewegen = true;
 	}
-
-	private void schlange3GehtZumSpieler() {
-		Spieler player = new Spieler();
-
-		if (player.playerPosition.x < snakePosition3.x)
-			snakePosition3.x--;
-		else if (player.playerPosition.x > snakePosition3.x)
-			snakePosition3.x++;
-		if (player.playerPosition.y < snakePosition3.y)
-			snakePosition3.y--;
-		else if (player.playerPosition.y > snakePosition3.y)
-			snakePosition3.y++;
-	}
-
-	private void schlange4GehtZumSpieler() {
-		Spieler player = new Spieler();
-
-		if (player.playerPosition.x < snakePosition4.x)
-			snakePosition4.x--;
-		else if (player.playerPosition.x > snakePosition4.x)
-			snakePosition4.x++;
-		if (player.playerPosition.y < snakePosition4.y)
-			snakePosition4.y--;
-		else if (player.playerPosition.y > snakePosition4.y)
-			snakePosition4.y++;
-	}
-
 }

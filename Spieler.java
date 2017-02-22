@@ -1,36 +1,55 @@
 package game.togheter.de;
 
-import java.util.Random;
 import java.util.Scanner;
 
-public class Spieler {
-	Scanner scan = new Scanner(System.in);
-	
-	Random r = new Random();
-	
-	java.awt.Point playerPosition = new java.awt.Point(10, 9);
-	
-	boolean ende = false;
-	
-	char getSpielerEingabe(){
+public class Spieler extends SpielObjekt {
+	private Scanner scan = new Scanner(System.in);
+	private boolean ende = false;
+
+	public Spieler() {
+		super(40, 10);
+	}
+
+	/**
+	 * @Methode zum testen ob ende false oder true ist
+	 */
+	public boolean testIstSpielVorbei() {
+		return ende;
+	}
+
+	/**
+	 * @Methode zum beenden des spiels
+	 */
+	public void esIstZuende() {
+		ende = true;
+	}
+
+	/**
+	 * @Methode zum erfassen der Spielereingabe
+	 */
+	public char getSpielerEingabe() {
 		System.out.println(); // Zum eingeben von w,a,s,d
 		char eingabe = scan.next().charAt(0);
 		return eingabe;
 	}
-	
-	void spielerBewegung(char eingabe) {
+
+	/**
+	 * @Methode um die Spieler Bewegung umzusetzen
+	 */
+	public void spielerBewegung(char eingabe) {
 		switch (eingabe) {
 		case 'w':
-			playerPosition.y = Math.max(0, playerPosition.y - 1);
+			veraendereYPositionUm(-1);
 			break;
 		case 's':
-			playerPosition.y = Math.min(9, playerPosition.y + 1);
+			veraendereYPositionUm(1);
+			;
 			break;
 		case 'a':
-			playerPosition.x = Math.max(0, playerPosition.x - 1);
+			veraendereXPositionUm(1);
 			break;
 		case 'd':
-			playerPosition.x = Math.min(39, playerPosition.x + 1);
+			veraendereXPositionUm(-1);
 			break;
 		}
 	}
