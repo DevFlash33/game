@@ -17,10 +17,10 @@ public class Game {
 		for (byte i = 0; i < 2; i++) { // Spieler z�ge
 			game.spielfeldErstellen();
 			game.abfrage();
-			player.spielerBewegung(player.getSpielerEingabe());
+			player.spielerBewegung(player.getSpielerEingabe(), game.player);
 			game.abfrage();
 		}
-		schlange.geheZumSpieler(player.erhaltePosition().x, player.erhaltePosition().y, game.getArraySchlangen());
-	} while (player.testIstSpielVorbei() == false);
+		schlange.geheZumSpieler(game.player.erhaltePosition().x, game.player.erhaltePosition().y, game.getArraySchlangen());
+	} while (game.player.testIstSpielVorbei() == false);
 	}
 }

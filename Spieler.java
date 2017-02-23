@@ -36,20 +36,20 @@ public class Spieler extends SpielObjekt {
 	/**
 	 * @Methode um die Spieler Bewegung umzusetzen
 	 */
-	public void spielerBewegung(char eingabe) {
+	public void spielerBewegung(char eingabe, Spieler spieler) {
 		switch (eingabe) {
 		case 'w':
-			veraendereYPositionUm(-1);
+			spieler.veraendereYPositionUm(-1);
 			break;
 		case 's':
-			veraendereYPositionUm(1);
+			spieler.veraendereYPositionUm(1);
 			;
 			break;
 		case 'a':
-			veraendereXPositionUm(1);
+			spieler.veraendereXPositionUm(-1);
 			break;
 		case 'd':
-			veraendereXPositionUm(-1);
+			spieler.veraendereXPositionUm(1);
 			break;
 		}
 	}

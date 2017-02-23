@@ -1,5 +1,4 @@
 package game.togheter.de;
-
 /**
  * Um das hier nun angenehmer zu machen, wird die klasse abstrakter gestaltet.
  * Wir beschränken uns auf die Dinge, die jede Schlange hat.
@@ -46,18 +45,14 @@ public class Schlange extends SpielObjekt {
 					 * Position der Schlange
 					 */
 					schlangen[i].veraendereXPositionUm(-1);
-					System.out.println("bin ich hier reingekommen-x?");
 				} else if (spielerXPosition > schlangen[i].erhaltePosition().x) {
 					schlangen[i].veraendereXPositionUm(1);
-					System.out.println("bin ich hier reingekommen+x?");
 				}
 
 				if (spielerYPosition < schlangen[i].erhaltePosition().y) {
 					schlangen[i].veraendereYPositionUm(-1);
-					System.out.println("bin ich hier reingekommen-y?");
 				} else if (spielerYPosition > schlangen[i].erhaltePosition().y) {
 					schlangen[i].veraendereYPositionUm(1);
-					System.out.println("bin ich hier reingekommen+y?");
 				}
 			}
 		}

@@ -58,15 +58,15 @@ public class SpielFeld {
 			System.out.println("Die Schlange hat dich!");
 			player.esIstZuende(); // beende das game
 		}
-		if (player.erhaltePosition().equals(goldMuenzen[0])) {
+		if (player.erhaltePosition().equals(goldMuenzen[0].erhaltePosition())) {
 			goldMuenzen[0].goldWurdeEingesammelt();
 			goldMuenzen[0].setzeNeuePosition(-1, -1);
 		}
-		if (player.erhaltePosition().equals(goldMuenzen[1])) {
+		if (player.erhaltePosition().equals(goldMuenzen[1].erhaltePosition())) {
 			goldMuenzen[1].goldWurdeEingesammelt();
 			goldMuenzen[1].setzeNeuePosition(-1, -1);
 		}
-		if (player.erhaltePosition().equals(goldMuenzen[2])) {
+		if (player.erhaltePosition().equals(goldMuenzen[2].erhaltePosition())) {
 			goldMuenzen[2].goldWurdeEingesammelt();
 			goldMuenzen[2].setzeNeuePosition(-1, -1);
 		}
